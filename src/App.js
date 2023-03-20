@@ -1,13 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider } from "react-router";
+import "./App.css";
+import routes from "./routes/routes";
 
 function App() {
-  return (
-    <div className="App">
-      Hello world
-      
-    </div>
-  );
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
