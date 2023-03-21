@@ -1,18 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { signInUser } from "../../store/authSlice";
 const SignInForm = () => {
-  
   const emailRef = useRef("");
   const passRef = useRef("");
 
-    const [showPassword,setShowPassword] = useState(false)
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user)
+  const loginError = useSelector (state=>state.auth.loginError)
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    const email = emailRef.current.value;
+    const password = passRef.current.value;
+
+    dispatch(signInUser({email,password}));
+  };
+
+  if (user.token) {
+    return <Navigate to="/dashboard/dashboard" replace={true} />;
+  }
 
   return (
-    <form>
-      <div>
-        <div className="relative mb-6">
+    <form onSubmit={handleSignIn}>
+      <div className="mb-6">
+        <div className="relative ">
           <div className="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
             @
           </div>
@@ -25,6 +43,9 @@ const SignInForm = () => {
             required
           />
         </div>
+        <div className="text-orange-500 text-xs  ml-1">
+          {loginError.message && loginError.message}
+        </div>
       </div>
 
       <div>
@@ -33,20 +54,21 @@ const SignInForm = () => {
             <FontAwesomeIcon className="   mr-2" icon={faLock} />
           </div>
           <input
-            type={showPassword?'text':'password'}
-            class=" border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl focus:outline-orange-500 block w-full pl-12 py-5  "
+            type={showPassword ? "text" : "password"}
+            class=" border border-gray-100 font-medium  text-gray-900 text-sm rounded-2xl focus:outline-gray-200 block w-full pl-12 py-5  "
             placeholder="Create Password"
             name="password"
+            ref={passRef}
           />
           <button
             type="button"
             class="block w-5 h-5 text-center text-xl leading-0 absolute top-4 right-5 text-gray-400 focus:outline-none hover:text-orange-500 transition-colors"
-            onClick={()=>setShowPassword(!showPassword)}
-
+            onClick={() => setShowPassword(!showPassword)}
           >
-            
-            <FontAwesomeIcon className="text-md text-gray-300 " icon={showPassword ? faEye : faEyeSlash} />
-
+            <FontAwesomeIcon
+              className="text-md text-gray-300 "
+              icon={showPassword ? faEye : faEyeSlash}
+            />
           </button>
         </div>
       </div>

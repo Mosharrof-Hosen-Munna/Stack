@@ -1,9 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faGrip, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/authSlice";
 
 const DashboardSideMenu = () => {
+  const dispatch = useDispatch()
+  const handleLogout = ()=>{
+    dispatch(logout())
+  }
   return (
     <div style={{ minWidth: "250px" }}>
       <div className="flex items-center py-8 pl-8">
@@ -66,6 +72,15 @@ const DashboardSideMenu = () => {
             />
             Sales
           </NavLink>
+        </li>
+        <li onClick={handleLogout} className="p-4 my-2 cursor-pointer  flex items-center  rounded-xl text-sm text-gray-400 mx-4">
+         
+            <FontAwesomeIcon
+              className="text-xl text-gray-400  font-bold mr-4"
+              icon={faUser}
+            />
+            LogOut
+          
         </li>
       </ul>
     </div>

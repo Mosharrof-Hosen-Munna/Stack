@@ -1,12 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import googleIcon from "../../images/google.svg";
 import appleIcon from "../../images/apple.svg";
 import SignInForm from "./SignInForm";
 import { useSelector } from "react-redux";
 
 const SignIn = () => {
-  const isLoading = useSelector(state =>state.auth.user)
-  console.log(isLoading)
+ 
   return (
     <div className="xl:container mx-auto px-4 mt-4">
       <div className="flex items-center justify-center">

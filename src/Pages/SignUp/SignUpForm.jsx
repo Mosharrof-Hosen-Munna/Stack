@@ -26,7 +26,7 @@ const SignUpForm = () => {
 
   //   const {registration,regError}= useAuth()
 
-  const handleRegistration = async (e) => {
+  const handleSignup = async (e) => {
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passRef.current.value;
@@ -47,17 +47,16 @@ const SignUpForm = () => {
     };
 
     dispatch(signupUser(userData));
-
   };
 
-  if(user.token){
-   return <Navigate to="/dashboard" replace={true} />
+  if (user.token) {
+    return <Navigate to="/dashboard/dashboard" replace={true} />;
   }
 
   console.log(regError);
 
   return (
-    <form onSubmit={handleRegistration}>
+    <form onSubmit={handleSignup}>
       <div>
         <div className="relative mb-6">
           <div className="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
