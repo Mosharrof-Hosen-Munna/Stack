@@ -3,20 +3,26 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const SignInForm = () => {
+  
+  const emailRef = useRef("");
+  const passRef = useRef("");
+
     const [showPassword,setShowPassword] = useState(false)
 
   return (
     <form>
       <div>
-        <div class="relative mb-6">
-          <div class="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
+        <div className="relative mb-6">
+          <div className="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
             @
           </div>
           <input
             type="email"
-            class=" border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl focus:outline-orange-500 block w-full pl-12 py-5  "
+            ref={emailRef}
+            className=" border border-gray-100 font-medium  text-gray-900 text-sm rounded-2xl focus:outline-gray-200 block w-full pl-12 py-5  "
             placeholder="Your Email"
             name="email"
+            required
           />
         </div>
       </div>

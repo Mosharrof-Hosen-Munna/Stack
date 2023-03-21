@@ -6,6 +6,7 @@ import Sales from "../Pages/Sales/Sales";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Users from "../Pages/Users/Users";
+import PrivateRoute from "./PrivateRoute";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -27,15 +28,15 @@ const routes = createBrowserRouter([
     children:[
         {
             path:'/dashboard/dashboard',
-            element: <Dashboard/>
+            element:<PrivateRoute><Dashboard/></PrivateRoute>
         },
         {
             path:'/dashboard/users',
-            element:<Users/>
+            element:<PrivateRoute><Users/></PrivateRoute>
         },
         {
             path:'/dashboard/sales',
-            element:<Sales/>
+            element:<PrivateRoute><Sales/></PrivateRoute>
         }
     ]
   }
