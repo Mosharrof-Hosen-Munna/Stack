@@ -5,11 +5,13 @@ import {
   faFaceSmileBeam,
   faLock,
   faEye,
+  faEyeSlash
 } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../Hooks/useAuth";
 const SignUpForm = () => {
     const [agreeTerms,setAgreeTerms] = useState(false)
     const [showTermsError,setShowTermsError] = useState(false)
+    const [showPassword,setShowPassword] = useState(false)
 
     const emailRef = useRef('')
     const nameRef = useRef('')
@@ -41,8 +43,8 @@ const SignUpForm = () => {
           />
         </div>
       </div>
-      <div>
-        <div className="relative mb-6">
+      <div className="mb-6">
+        <div className="relative ">
           <div className="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
             <FontAwesomeIcon className="   mr-2" icon={faFaceSmileBeam} />
           </div>
@@ -53,30 +55,32 @@ const SignUpForm = () => {
             placeholder="Your Name"
             name="name"
           />
-          <div className="text-orange-500 text-xs mt-1 ml-1">{regError.name&&regError.name}</div>
         </div>
+          <div className="text-orange-500 text-xs  ml-1">{regError.name&&regError.name}</div>
       </div>
-      <div>
-        <div className="relative mb-6">
+      <div className="mb-6">
+        <div className="relative ">
           <div className="absolute inset-y-0 left-0 text-lg text-gray-300 flex items-center pl-5 pointer-events-none">
             <FontAwesomeIcon className="   mr-2" icon={faLock} />
           </div>
           <input
-            type="password"
+            type={showPassword?'text':'password'}
             ref={passRef}
             className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${regError.password&& 'border-orange-500'} focus:outline-gray-200 block w-full pl-12 py-5  `}
             placeholder="Create Password"
             name="password"
           />
-          <div className="text-orange-500 text-xs mt-1 ml-1">{regError.password&&regError.password}</div>
 
           <button
             type="button"
             className="block w-5 h-5 text-center text-xl leading-0 absolute top-4 right-5 text-gray-400 focus:outline-none hover:text-orange-500 transition-colors"
+            onClick={()=>setShowPassword(!showPassword)}
           >
-            <FontAwesomeIcon className="text-md text-gray-300 " icon={faEye} />
+            <FontAwesomeIcon className="text-md text-gray-300 " icon={showPassword ? faEye : faEyeSlash} />
           </button>
         </div>
+        <div className="text-orange-500 text-xs mt-1 ml-1">{regError.password&&regError.password}</div>
+
       </div>
       <div className="flex items-center  gap-5 px-4">
         <div className="p-0.5 w-full bg-green-500 rounded"></div>

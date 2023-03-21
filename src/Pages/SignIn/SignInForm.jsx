@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const SignInForm = () => {
+    const [showPassword,setShowPassword] = useState(false)
+
   return (
     <form>
       <div>
@@ -25,7 +27,7 @@ const SignInForm = () => {
             <FontAwesomeIcon className="   mr-2" icon={faLock} />
           </div>
           <input
-            type="password"
+            type={showPassword?'text':'password'}
             class=" border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl focus:outline-orange-500 block w-full pl-12 py-5  "
             placeholder="Create Password"
             name="password"
@@ -33,9 +35,12 @@ const SignInForm = () => {
           <button
             type="button"
             class="block w-5 h-5 text-center text-xl leading-0 absolute top-4 right-5 text-gray-400 focus:outline-none hover:text-orange-500 transition-colors"
+            onClick={()=>setShowPassword(!showPassword)}
+
           >
-            {" "}
-            <FontAwesomeIcon className="text-md text-gray-300 " icon={faEye} />
+            
+            <FontAwesomeIcon className="text-md text-gray-300 " icon={showPassword ? faEye : faEyeSlash} />
+
           </button>
         </div>
       </div>
