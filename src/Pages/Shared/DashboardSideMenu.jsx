@@ -11,8 +11,9 @@ const DashboardSideMenu = () => {
     dispatch(logout())
   }
   return (
-    <div style={{ minWidth: "250px" }}>
-      <div className="flex items-center py-8 pl-8">
+    <div  style={{ minWidth: "250px" }}>
+      <div className="sticky min-h-fit top-0">
+      <div className="flex   items-center py-8 pl-8">
         <FontAwesomeIcon
           className="text-2xl text-blue-400 font-bold mr-2"
           icon={faBook}
@@ -83,6 +84,7 @@ const DashboardSideMenu = () => {
           
         </li>
       </ul>
+      </div>
     </div>
   );
 };
