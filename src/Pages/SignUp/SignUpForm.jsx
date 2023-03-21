@@ -1,30 +1,60 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceSmileBeam,
   faLock,
   faEye,
-  faEyeSlash
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import useAuth from "../../Hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { registrationValidation } from "../../validations/authValidator";
+import { setRegError, signupUser } from "../../store/authSlice";
 const SignUpForm = () => {
-    const [agreeTerms,setAgreeTerms] = useState(false)
-    const [showTermsError,setShowTermsError] = useState(false)
-    const [showPassword,setShowPassword] = useState(false)
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [showTermsError, setShowTermsError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-    const emailRef = useRef('')
-    const nameRef = useRef('')
-    const passRef = useRef('')
+  const emailRef = useRef("");
+  const nameRef = useRef("");
+  const passRef = useRef("");
 
-    const {registration,regError}= useAuth()
+  const regError = useSelector((state) => state.auth.regError);
+  const user = useSelector((state) => state.auth.user);
 
-    const handleRegistration = (e)=>{
-        e.preventDefault()
-        if(!agreeTerms) return setShowTermsError(true)
-        const isRegistrated = registration(nameRef.current.value,emailRef.current.value,passRef.current.value)
+  const dispatch = useDispatch();
 
+  //   const {registration,regError}= useAuth()
+
+  const handleRegistration = async (e) => {
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passRef.current.value;
+
+    e.preventDefault();
+    if (!agreeTerms) return setShowTermsError(true);
+    // const isRegistrated = registration(nameRef.current.value,emailRef.current.value,passRef.current.value)
+    const validateErr = registrationValidation(name, password);
+    if (validateErr?.name || validateErr?.password) {
+      dispatch(setRegError(validateErr));
+      return;
     }
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    dispatch(signupUser(userData));
+
+  };
+
+  if(user.token){
+   return <Navigate to="/dashboard" replace={true} />
+  }
+
+  console.log(regError);
 
   return (
     <form onSubmit={handleRegistration}>
@@ -51,12 +81,16 @@ const SignUpForm = () => {
           <input
             type="text"
             ref={nameRef}
-            className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${regError.name&& 'border-orange-500'} focus:outline-gray-200 block w-full pl-12 py-5  `}
+            className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${
+              regError.name && "border-orange-500"
+            } focus:outline-gray-200 block w-full pl-12 py-5  `}
             placeholder="Your Name"
             name="name"
           />
         </div>
-          <div className="text-orange-500 text-xs  ml-1">{regError.name&&regError.name}</div>
+        <div className="text-orange-500 text-xs  ml-1">
+          {regError.name && regError.name}
+        </div>
       </div>
       <div className="mb-6">
         <div className="relative ">
@@ -64,9 +98,11 @@ const SignUpForm = () => {
             <FontAwesomeIcon className="   mr-2" icon={faLock} />
           </div>
           <input
-            type={showPassword?'text':'password'}
+            type={showPassword ? "text" : "password"}
             ref={passRef}
-            className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${regError.password&& 'border-orange-500'} focus:outline-gray-200 block w-full pl-12 py-5  `}
+            className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${
+              regError.password && "border-orange-500"
+            } focus:outline-gray-200 block w-full pl-12 py-5  `}
             placeholder="Create Password"
             name="password"
           />
@@ -74,13 +110,17 @@ const SignUpForm = () => {
           <button
             type="button"
             className="block w-5 h-5 text-center text-xl leading-0 absolute top-4 right-5 text-gray-400 focus:outline-none hover:text-orange-500 transition-colors"
-            onClick={()=>setShowPassword(!showPassword)}
+            onClick={() => setShowPassword(!showPassword)}
           >
-            <FontAwesomeIcon className="text-md text-gray-300 " icon={showPassword ? faEye : faEyeSlash} />
+            <FontAwesomeIcon
+              className="text-md text-gray-300 "
+              icon={showPassword ? faEye : faEyeSlash}
+            />
           </button>
         </div>
-        <div className="text-orange-500 text-xs mt-1 ml-1">{regError.password&&regError.password}</div>
-
+        <div className="text-orange-500 text-xs mt-1 ml-1">
+          {regError.password && regError.password}
+        </div>
       </div>
       <div className="flex items-center  gap-5 px-4">
         <div className="p-0.5 w-full bg-green-500 rounded"></div>
@@ -97,11 +137,17 @@ const SignUpForm = () => {
           value=""
           id="flexCheckDefault"
           checked={agreeTerms}
-          onClick={()=>{
-            setShowTermsError(false)
-            setAgreeTerms(!agreeTerms)}}
+          onClick={() => {
+            setShowTermsError(false);
+            setAgreeTerms(!agreeTerms);
+          }}
         />
-        <label className={`${showTermsError ? 'text-orange-500' : 'text-gray-400'}  font-medium`} for="flexCheckDefault">
+        <label
+          className={`${
+            showTermsError ? "text-orange-500" : "text-gray-400"
+          }  font-medium`}
+          for="flexCheckDefault"
+        >
           I agree to the Terms & Conditions
         </label>
       </div>
