@@ -23,6 +23,7 @@ const SignInForm = () => {
     dispatch(signInUser({email,password}));
   };
 
+  // navigate user if user not login
   if (user.token) {
     return <Navigate to="/dashboard/dashboard" replace={true} />;
   }

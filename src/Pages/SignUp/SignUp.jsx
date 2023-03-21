@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const SignUp = () => {
   const signupLoading = useSelector(state=>state.auth.isLoading)
 
+  // show spinner for loading
   if(signupLoading){
       return (
         <div style={{background:'#f5f5f54d'}} className="absolute top-0 left-0  z-50 w-full min-h-screen flex items-center justify-center">
@@ -25,6 +26,7 @@ const SignUp = () => {
         </div>
       );
     }
+    
   return (
     <div className="xl:container mx-auto px-4 mt-4">
       <div className="flex items-center justify-center">

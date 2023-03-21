@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { registrationValidation } from "../../validations/authValidator";
 import { setRegError, signupUser } from "../../store/authSlice";
+
 const SignUpForm = () => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showTermsError, setShowTermsError] = useState(false);
@@ -24,16 +25,15 @@ const SignUpForm = () => {
 
   const dispatch = useDispatch();
 
-  //   const {registration,regError}= useAuth()
-
   const handleSignup = async (e) => {
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passRef.current.value;
 
     e.preventDefault();
+
     if (!agreeTerms) return setShowTermsError(true);
-    // const isRegistrated = registration(nameRef.current.value,emailRef.current.value,passRef.current.value)
+
     const validateErr = registrationValidation(name, password);
     if (validateErr?.name || validateErr?.password) {
       dispatch(setRegError(validateErr));
@@ -49,11 +49,10 @@ const SignUpForm = () => {
     dispatch(signupUser(userData));
   };
 
+  // navigate user if user not login
   if (user.token) {
     return <Navigate to="/dashboard/dashboard" replace={true} />;
   }
-
-  console.log(regError);
 
   return (
     <form onSubmit={handleSignup}>

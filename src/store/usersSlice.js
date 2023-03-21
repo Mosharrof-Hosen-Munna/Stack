@@ -24,6 +24,7 @@ export const usersSlice = createSlice({
     }
 })
 
+//load user thunk
 export const loadUsers = createAsyncThunk('user/all',async (pageNumber)=>{
     const res = await axios.get(`https://reqres.in/api/users?page=${pageNumber}`)
     return res.data

@@ -66,6 +66,7 @@ export const authSlice = createSlice({
   },
 });
 
+//create sign up thunk
 export const signupUser = createAsyncThunk(
   "auth/signupUser",
   async (userData) => {
@@ -78,6 +79,7 @@ export const signupUser = createAsyncThunk(
   }
 );
 
+// create signin user thunk
 export const signInUser = createAsyncThunk(
   "auth/signInUser",
   async (userData) => {

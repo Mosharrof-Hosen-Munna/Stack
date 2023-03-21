@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 const Pagination = ({currentPage}) => {
 
     const users = useSelector(state=>state.users.users)
+
+    //make number to array
     const pagesArr = new Array(users.total_pages).fill("").map((_, i) => i + 1);
     
-
   return (
     <div className="mb-10">
       <div className="flex items-center justify-between  border-gray-200 bg-white px-4 py-3 sm:px-6">
@@ -35,7 +36,7 @@ const Pagination = ({currentPage}) => {
                   />
                 </svg>
               </Link>
-              {/* <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" --> */}
+              
               {pagesArr.map(page=><div>
                 <Link
               key={page}

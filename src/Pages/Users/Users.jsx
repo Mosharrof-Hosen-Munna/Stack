@@ -11,8 +11,6 @@ const Users = () => {
 
   const users = useSelector((state) => state.users);
 
-  console.log(pageNumber);
-
   useEffect(() => {
     dispatch(loadUsers(pageNumber ? pageNumber : 1));
   }, [pageNumber]);
