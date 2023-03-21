@@ -25,14 +25,14 @@ export const authSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    logout: (state,action)=>{
-        state.user = {}
-        localStorage.removeItem('user')
-    }
+    logout: (state) => {
+      state.user = {};
+      localStorage.removeItem("user");
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signupUser.pending, (state, action) => {
+      .addCase(signupUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
@@ -47,20 +47,20 @@ export const authSlice = createSlice({
       })
 
       // sign in user
-      .addCase(signInUser.pending, (state, action) => {
+      .addCase(signInUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-       if(action.payload.token){
-        state.user = action.payload;
-        localStorage.setItem('user',JSON.stringify(action.payload))
-        state.loginError ={}
-       }else{
-        state.loginError ={message: 'User not found!'}
-       }
+        if (action.payload.token) {
+          state.user = action.payload;
+          localStorage.setItem("user", JSON.stringify(action.payload));
+          state.loginError = {};
+        } else {
+          state.loginError = { message: "User not found!" };
+        }
         state.isLoading = false;
       })
-      .addCase(signInUser.rejected, (state, action) => {
+      .addCase(signInUser.rejected, (state) => {
         state.isLoading = false;
       });
   },
@@ -90,7 +90,12 @@ export const signInUser = createAsyncThunk(
   }
 );
 
-export const { setRegError, getUserLocalStorage, setLoading, setLoginError,logout } =
-  authSlice.actions;
+export const {
+  setRegError,
+  getUserLocalStorage,
+  setLoading,
+  setLoginError,
+  logout,
+} = authSlice.actions;
 
 export default authSlice.reducer;

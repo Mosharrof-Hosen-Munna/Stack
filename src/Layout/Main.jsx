@@ -7,7 +7,6 @@ const Main = () => {
     <div >
         <Navigation/>
         <Outlet/>
-       
     </div>
   )
 }

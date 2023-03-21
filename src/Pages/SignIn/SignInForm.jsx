@@ -37,7 +37,9 @@ const SignInForm = () => {
           <input
             type="email"
             ref={emailRef}
-            className=" border border-gray-100 font-medium  text-gray-900 text-sm rounded-2xl focus:outline-gray-200 block w-full pl-12 py-5  "
+            className={` border border-gray-100 font-medium text- text-gray-900 text-sm rounded-2xl ${
+              loginError.message && "border-orange-500"
+            } focus:outline-gray-200 block w-full pl-12 py-5  `}
             placeholder="Your Email"
             name="email"
             required

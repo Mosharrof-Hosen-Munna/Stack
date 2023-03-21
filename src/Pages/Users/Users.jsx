@@ -20,23 +20,23 @@ const Users = () => {
   return (
     <div>
       <div className="mb-10">
-        <h1 className="text-xl font-semibold text-gray-800">Users List</h1>
+        <h1 className="text-2xl font-semibold text-gray-800">Users List</h1>
       </div>
 
-      <div class="relative px-8 overflow-x-auto">
+      <div class="relative overflow-x-auto">
         <table class="w-full  text-sm text-left text-gray-500 ">
-          <thead class="text-xs text-gray-600 uppercase ">
+          <thead class="text-xs text-gray-600 bg-slate-50 rounded-lg uppercase ">
             <tr>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" class="px-6 py-4">
                 #ID
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" class="px-6 py-4">
                 USER
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" class="px-6 py-4">
                 EMAIL
               </th>
-              <th scope="col" class="px-6 float-right py-3">
+              <th scope="col" class="px-6 float-right py-4">
                 OPTIONS
               </th>
             </tr>

@@ -3,8 +3,28 @@ import React, { useState } from "react";
 import googleIcon from "../../images/google.svg";
 import appleIcon from "../../images/apple.svg";
 import SignUpForm from "./SignUpForm";
+import { ThreeDots } from "react-loader-spinner";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
+  const signupLoading = useSelector(state=>state.auth.isLoading)
+
+  if(signupLoading){
+      return (
+        <div style={{background:'#f5f5f54d'}} className="absolute top-0 left-0  z-50 w-full min-h-screen flex items-center justify-center">
+          <ThreeDots
+            height="100"
+            width="100"
+            radius="9"
+            color="orange"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        </div>
+      );
+    }
   return (
     <div className="xl:container mx-auto px-4 mt-4">
       <div className="flex items-center justify-center">
@@ -19,11 +39,11 @@ const SignUp = () => {
             </p>
           </div>
           <div className="flex gap-8 mb-4">
-            <button className="flex items-center rounded-2xl font-medium text-gray-400 bg-gray-100 w-1/2 px-7 py-4 text-base">
+            <button className="flex items-center rounded-2xl font-medium text-gray-400 bg-secondary w-1/2 px-7 py-4 text-base">
               <img src={googleIcon} className="w-5 mr-3" alt="" /> Sign Up with
               Google
             </button>
-            <button className="flex items-center rounded-2xl font-medium text-gray-400 bg-gray-100 w-1/2 px-7 py-4 text-base">
+            <button className="flex items-center rounded-2xl font-medium text-gray-400 bg-secondary w-1/2 px-7 py-4 text-base">
               <img src={appleIcon} className="w-5 mr-3" alt="" /> Sign Up with
               Apple ID
             </button>

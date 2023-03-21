@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faGrip, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faGrip, faUser,faChartSimple,faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
@@ -12,13 +12,13 @@ const DashboardSideMenu = () => {
   }
   return (
     <div  style={{ minWidth: "250px" }}>
-      <div className="sticky min-h-fit top-0">
+      <div className="sticky min-h-screen top-0 border-r-2">
       <div className="flex   items-center py-8 pl-8">
         <FontAwesomeIcon
-          className="text-2xl text-blue-400 font-bold mr-2"
+          className="text-3xl text-blue-400 font-bold mr-2"
           icon={faBook}
         />
-        <h1 className="text-2xl font-bold " style={{ color: "#4E5D78" }}>
+        <h1 className="text-3xl font-bold " style={{ color: "#4E5D78" }}>
           Stack
         </h1>
       </div>
@@ -30,7 +30,7 @@ const DashboardSideMenu = () => {
             to="/dashboard/dashboard"
             className={({ isActive}) =>
               isActive
-                ? "p-4 bg-slate-100  flex items-center  rounded-xl text-sm text-gray-400 mx-4"
+                ? "p-4 bg-secondary  flex items-center  rounded-xl text-sm text-gray-400 mx-4"
                 : "p-4   flex items-center  rounded-xl text-sm text-gray-400 mx-4"
             }
           >
@@ -47,7 +47,7 @@ const DashboardSideMenu = () => {
             to="/dashboard/users"
             className={({ isActive}) =>
               isActive
-                ? "p-4 bg-slate-100  flex items-center  rounded-xl text-sm text-gray-400 mx-4"
+                ? "p-4 bg-secondary  flex items-center  rounded-xl text-sm text-gray-400 mx-4"
                 : "p-4   flex items-center  rounded-xl text-sm text-gray-400 mx-4"
             }
           >
@@ -63,13 +63,13 @@ const DashboardSideMenu = () => {
             to="/dashboard/sales"
             className={({ isActive}) =>
               isActive
-                ? "p-4 bg-slate-100  flex items-center  rounded-xl text-sm text-gray-400 mx-4"
+                ? "p-4 bg-secondary flex items-center  rounded-xl text-sm text-gray-400 mx-4"
                 : "p-4   flex items-center  rounded-xl text-sm text-gray-400 mx-4"
             }
           >
             <FontAwesomeIcon
               className="text-xl text-gray-400  font-bold mr-4"
-              icon={faUser}
+              icon={faChartSimple}
             />
             Sales
           </NavLink>
@@ -78,7 +78,7 @@ const DashboardSideMenu = () => {
          
             <FontAwesomeIcon
               className="text-xl text-gray-400  font-bold mr-4"
-              icon={faUser}
+              icon={faRightFromBracket}
             />
             LogOut
           
