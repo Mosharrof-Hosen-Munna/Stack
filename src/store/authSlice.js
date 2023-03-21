@@ -61,14 +61,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(signInUser.rejected, (state, action) => {
-       
         state.isLoading = false;
       });
   },
 });
 
 export const signupUser = createAsyncThunk(
-  "user/signupUser",
+  "auth/signupUser",
   async (userData) => {
     try {
       const res = await axios.post("https://reqres.in/api/register", userData);
@@ -80,7 +79,7 @@ export const signupUser = createAsyncThunk(
 );
 
 export const signInUser = createAsyncThunk(
-  "user/signInUser",
+  "auth/signInUser",
   async (userData) => {
     try {
       const res = await axios.post("https://reqres.in/api/login", userData);
