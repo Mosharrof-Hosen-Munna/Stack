@@ -17,7 +17,7 @@ const SignUp = () => {
             height="100"
             width="100"
             radius="9"
-            color="orange"
+            color="blue"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
             wrapperClassName=""
@@ -26,7 +26,7 @@ const SignUp = () => {
         </div>
       );
     }
-    
+
   return (
     <div className="xl:container mx-auto px-4 mt-4">
       <div className="flex items-center justify-center">
